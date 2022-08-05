@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head"></head>
+<body>
+
+<!--    Section-->
+<div th:replace="layout/frag :: top-bar"></div>
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="admin">Home</a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" th:href="cars-admin">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+
+                    <li class="nav-item active"><a class="nav-link" th:href="cars-management">Vehicle Mangement</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div class="page-heading about-heading header-text" style="background-image: url(/images/heading-6-1920x500.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h4>Welcome to amazing world</h4>
+                    <h2>Cars</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin: 50px 50px" class="products">
+    <table class="table table-striped">
+        <thead style="border: 1px solid lightgrey">
+        <tr>
+            <th style="border: 1px solid lightgrey; " scope="col"></th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Id</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Make</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Model</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Type</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Year</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Engine</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">HP</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Body Style</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Status</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Price</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">Action</th>
+            <th style="border: 1px solid lightgrey; text-align: center;" scope="col">
+                <a href="/add/vehicle" class="btn float-right"><i class="fas fa-plus-circle"></i> Adding Vehicle</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="vehicle: ${listVehicle}">
+                <td class="rounded img-thumbnail" >
+                    <img style="width: 170px; height: 110px" th:src="@{${vehicle.getImg()}}" alt="">
+                </td>
+                <td th:text="${vehicle.getVehicleId()}" style="border: 1px solid lightgrey; text-align: center"></td>
+                <td th:text="${vehicle.getVehicleMake()}      " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getVehicleModel()}     " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getVehicleType()}      " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getVehicleYear()}      " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getVehicleEngine()}    " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getVehicleHorsepower()}" style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getBodyStyle()}        " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getStatus()}           " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td th:text="${vehicle.getPrice()}            " style="border: 1px solid lightgrey; text-align: center" ></td>
+                <td style="border: 1px solid lightgrey; text-align: center">
+                    <a class="btn btn-info" th:href="@{update/{id}(id = ${vehicle.vehicleId})}"> Edit</a></td>
+                <td style="border: 1px solid lightgrey; text-align: center">
+                    <a class="btn btn-danger" th:href="@{delete/vehicle/{id}(id = ${vehicle.vehicleId})}"> Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="layout/frag :: footer"></div>
+
+<script type="text/javascript">
+</script>
+
+<div th:replace="layout/frag :: script"></div>
+</body>
+</html>

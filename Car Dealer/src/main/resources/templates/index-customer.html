@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head">
+</head>
+<body>
+
+<!--    Preloader-->
+<div th:replace="layout/frag :: preloader"></div>
+
+<!--    Section-->
+<div th:replace="layout/frag :: top-bar"></div>
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="cars-customer">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!--    Banner-->
+<div th:replace="layout/frag :: banner"></div>
+
+<!--    Product-->
+<div th:replace="layout/frag :: product"></div>
+
+<!--    Team-->
+<div th:replace="layout/frag :: team"></div>
+
+
+<div class="call-to-action" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Have a question? Let's connect.</h4>
+                            <p>Contact our team.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <a href="contact.html" class="filled-button">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    Footer-->
+<div th:replace="layout/frag :: footer"></div>
+
+<!-- Script-->
+
+<div th:replace="layout/frag :: script"></div>
+
+</body>
+</html>

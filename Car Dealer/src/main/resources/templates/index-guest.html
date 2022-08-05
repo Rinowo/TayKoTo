@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head">
+</head>
+<body>
+
+<div th:replace="layout/frag :: preloader"></div>
+
+<!--    Section-->
+<div th:replace="layout/frag :: top-bar"></div>
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="home">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="cars">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+
+                    <li class="nav-item"><a data-target="#loginModal" data-toggle="modal" class="nav-link" href="#">Login</a></li>
+                    <div>
+                        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom-0">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-title text-center" style="padding-bottom: 30px;">
+                                            <h4>Login</h4>
+                                        </div>
+                                        <div class="d-flex flex-column text-center">
+                                            <form>
+                                                <div class="form-group">
+                                                    <input type="email" class="form-control" id="email1"placeholder="Your email address...">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                                                </div>
+                                                <button style="background-color: #f33f3f" type="button" class="btn btn-info btn-block btn-round">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <div  class="signup-section">Not a member yet? <a href="#a" class="text-info" style="color: #f33f3f"> Sign Up</a>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!--    Banner-->
+<div th:replace="layout/frag :: banner"></div>
+
+<!--    Product-->
+<!--<div th:replace="layout/frag :: product"></div>-->
+<div>
+    <div class="latest-products">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Featured Cars</h2>
+                        <a href="cars-management.html">view more <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                <div th:each="vehicle: ${listVehicle}">
+                    <div class="col-lg-4 col-md-6" >
+                        <div class="product-item" style="width: 350px; height: 460px";>
+                            <a th:href="@{cardetail/{id}(id = ${vehicle.vehicleId})}">
+                                <img th:src="@{${vehicle.getImg()}}" alt=""></a>
+                            <div class="down-content container" style="">
+                                <a href="car-details/">
+                                    <div>
+                                        <h4 style="display: inline-block " th:text="${vehicle.getVehicleMake()}"></h4>
+                                        <h4 style="display: inline-block " th:text="${vehicle.getVehicleModel()}"></h4>
+                                    </div>
+                                </a>
+
+                                <div>
+                                    <h6 style="display: inline-block">$</h6>
+                                    <h6 style="display: inline-block" th:text="${vehicle.getPrice()}"></h6>
+                                </div>
+
+                                <div>
+                                    <p style="display: inline-block" th:text="${vehicle.getVehicleHorsepower()}"></p>
+                                    <p style="display: inline-block" >/</p>
+                                    <p style="display: inline-block" th:text="${vehicle.getVehicleType()}"></p>
+                                    <p style="display: inline-block" >/</p>
+                                    <p style="display: inline-block" th:text="${vehicle.getVehicleYear()}"></p>
+                                </div>
+
+                                <small>
+                                    <strong><i class="fa fa-dashboard"></i></strong>
+                                    <strong th:text="${vehicle.getVehicleEngine()}"></strong>&nbsp;&nbsp;&nbsp;
+                                    <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    Team-->
+<div th:replace="layout/frag :: team"></div>
+
+
+<div class="call-to-action" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Have a question? Let's connect.</h4>
+                            <p>Contact our team.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <a href="contact.html" class="filled-button">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    Footer-->
+<div th:replace="layout/frag :: footer"></div>
+
+<!-- Script-->
+
+<div th:replace="layout/frag :: script"></div>
+
+</body>
+</html>
