@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head">
+    <title th:text="${info.getVehicleMake()}"></title>
+</head>
+<body>
+<!-- ***** Preloader Start *****-->
+<!--<div th:replace="layout/frag :: preloader"></div>-->
+<!-- ***** Preloader End *****-->
+
+<!-- Header -->
+<header class=""    >
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul th:switch="${user}" class="navbar-nav ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" th:href="@{/home}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active"><a class="nav-link" th:href="@{/cars}">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <div th:case="${user.customerId} == null">
+                        <li class="nav-item"><a data-target="#loginModal" data-toggle="modal" class="nav-link" href="#">Login</a></li>
+                        <div class="modal fade" id="loginModal" tabindex="-1" roles="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" roles="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom-0">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-title text-center" style="padding-bottom: 30px;">
+                                            <h4>Login</h4>
+                                        </div>
+                                        <div class="d-flex flex-column text-center">
+                                            <form th:action="@{j_spring_security_check}" method="POST">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="username" name="username" placeholder="Your username...">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="Your password...">
+                                                </div>
+                                                <button style="background-color: #f33f3f" type="submit" class="btn btn-info btn-block btn-round">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer d-flex justify-content-center">
+                                        <div  class="signup-section">Not a member yet? <a th:href="@{/register}" class="text-info" style="color: #f33f3f"> Sign Up</a>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div th:case="*">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" th:href="@{/order-list/{id}(id = ${user.customerId})}">Order</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+
+
+                            <!--                            Oanh-->
+
+                            <!--                            Logged user: <span sec:authentication="name">Bob</span>-->
+                            <!--                            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+                            <!--                            <li sec:authorize="hasRole('ROLE_ADMIN')"-->
+                            <!--                                class="nav-item"><a-->
+                            <!--                                    class="nav-link"-->
+                            <!--                                    th:href="@{/cars-management}">Management</a></li>-->
+                        </ul>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div class="page-heading about-heading header-text" style="background-image: url(/images/heading-6-1920x500.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <img th:src="@{${vehicle.getImg()}}" alt="" class="img-fluid wc-image">
+                </div>
+                <br>
+                <div class="row">
+                    <div th:each="images: ${gallery}" class="col-sm-4 col-6">
+                        <div>
+                            <img th:src="@{${images.img}}" alt="" class="img-fluid">
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Make</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleMake()}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Model</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleModel()}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Year</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleYear()}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Using</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleType()}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Engine size</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleEngine()}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Power</span>
+
+                                <strong class="pull-right" th:text="${info.getVehicleHorsepower()}"></strong>
+                            </div>
+                        </li>
+
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Gearbox</span>
+
+                                <strong class="pull-right">Manual</strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Number of seats</span>
+
+                                <strong class="pull-right" th:text="${info.seat}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Color</span>
+
+                                <strong class="pull-right" th:text="${info.color}"></strong>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="clearfix">
+                                <span class="pull-left">Price</span>
+
+                                <strong class="pull-right" style="margin-left: 3px" >$</strong>
+                                <strong class="pull-right" th:text="${info.price}"></strong>
+
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-heading">
+                    <h2>Vehicle Description</h2>
+                </div>
+
+                <div class="left-content">
+                    <p>- Colour coded bumpers<br>
+                        - Tinted glass<br>
+                        - Immobiliser<br>
+                        - Central locking
+                        - remote<br>
+                        - Passenger airbag<br>
+                        - Electric windows<br>
+                        - Rear head rests<br>
+                        - Radio<br>
+                        - CD player<br>
+                        - Ideal first car<br>
+                        - Warranty<br>
+                        - High level brake light<br></p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="section-heading">
+                    <h2>Vehicle Extras</h2>
+                </div>
+
+                <div class="left-content">
+                    <p>- ABS <br>
+                        -Leather seats <br>
+                        -Power Assisted Steering <br>
+                        -Electric heated seats <br>
+                        -New HU and AU <br>
+                        -Xenon headlights</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="section-heading">
+                    <h2>Contact Details</h2>
+                </div>
+
+                <div class="left-content">
+                    <p>
+                        <span>Name</span>
+
+                        <br>
+
+                        <strong>Rinowo</strong>
+                    </p>
+
+                    <p>
+                        <span>Phone</span>
+
+                        <br>
+
+                        <strong>
+                            <a href="tel:84 369 122 828">369 122 828</a>
+                        </strong>
+                    </p>
+
+                    <p>
+                        <span>Mobile phone</span>
+
+                        <br>
+
+                        <strong>
+                            <a href="tel:+84 369 122 828">369 122 828</a>
+                        </strong>
+                    </p>
+
+                    <p>
+                        <span>Email</span>
+
+                        <br>
+
+                        <strong>
+                            <a href="mailto:CarDealer@Gmail.com">CarDealer@Gmail.com</a>
+                        </strong>
+                    </p>
+                    <p>
+                        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#orderModal">Order</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="orderModal"
+     tabindex="-1"
+     roles="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div>
+        <form th:action="@{/submit-order/{id}(id = ${info.vehicleId})}"
+              th:object="${customer}"
+              th:method="POST">
+            <div class="modal-dialog modal-lg" roles="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Order</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input th:field="*{customerName}"  type="text" name="customerName"   class="form-control" placeholder="Name..." required="">
+                                        <input th:field="*{customerEmail}" type="email" name="customerEmail" class="form-control" placeholder="Email..." required="">
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <input th:field="*{customerPhone}"   type="text" class="form-control" name="customerPhone" placeholder="Phone number..." required="">
+                                        <input th:field="*{customerAddress}" type="text" class="form-control" name="customerAddress" placeholder="Address..." required="">
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div th:object="${deal}" class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <label for="price">Price:</label>
+                                        <input disabled th:field="*{price}" th:value="${info.price}" th:placeholder="${info.price}" name="price" type="text" id="price" class="form-control" required="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <label for="deposit">Deposit:</label>
+                                        <select th:field="*{deposit}" name="deposit" id="deposit">
+                                            <option th:text=" ${info.price} * 30/100" th:value="${info.price} * 30/100">30%</option>
+                                            <option th:text=" ${info.price} * 50/100" th:value="${info.price} * 50/100">50%</option>
+                                            <option th:text=" ${info.price} * 70/100" th:value="${info.price} * 70/100">70%</option>
+                                        </select>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <input type="submit" value="Order now" class="btn btn-primary">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="layout/frag :: footer"></div>
+<div th:replace="layout/frag :: script"></div>
+</body>
+</html>

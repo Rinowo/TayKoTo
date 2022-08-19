@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head"></head>
+<body>
+
+    <div>
+        <form th:action="@{/add/vehicle}"
+              th:object="${vehicle}"
+              enctype="multipart/form-data"
+              method="POST">
+
+            <div class="row container">
+                <div class="col">
+                    <label data-error="wrong" data-success="right" for="vehicleMake">Brand</label>
+                    <input th:field="*{vehicleMake}" type="text" id="vehicleMake" class="form-control validate">
+                    <span class="alert alert-warning" th:if="${#fields.hasErrors('vehicleMake')}" th:errors="*{vehicleMake}"></span>
+                </div>
+                <div class="col">
+                    <label data-error="wrong" data-success="right" for="vehicleModel">Model</label>
+                    <input th:field="*{vehicleModel}" type="text" id="vehicleModel" class="form-control validate">
+                    <span class="alert alert-warning" th:if="${#fields.hasErrors('vehicleModel')}" th:errors="*{vehicleModel}"></span>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input th:field="*{vehicleType}" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Electro">
+                            <label class="form-check-label" for="inlineCheckbox1">Electro</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input th:field="*{vehicleType}" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Petrol">
+                            <label class="form-check-label" for="inlineCheckbox2">Petrol</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="bodyType">Body</label>
+                            <select th:field="*{bodyStyle}" class="form-control" id="bodyType">
+                                <option value="SUV" >SUV</option>
+                                <option value="Sport" >Sport</option>
+                                <option value="Sedan" >Sedan</option>
+                            </select>
+<!--                            <select th:field="*{bodyStyle}" th:each="body: ${category}" class="form-control" id="bodyType">-->
+<!--                                <option th:value="${body.bodyStyle}" th:text="${body.bodyStyle}"></option>-->
+<!--                            </select>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label data-error="wrong" data-success="right" for="vehicleHP">HP</label>
+                        <input th:field="*{vehicleHorsepower}" type="text" id="vehicleHP" class="form-control validate">
+                    </div>
+                    <div class="col">
+                        <label data-error="wrong" data-success="right" for="cc">CC</label>
+                        <input th:field="*{vehicleEngine}" type="text" id="cc" class="form-control validate">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label data-error="wrong" data-success="right" for="vehicleYear">Year</label>
+                        <input th:field="*{vehicleYear}" type="text" id="vehicleYear" class="form-control validate">
+                    </div>
+                    <div class="col">
+                        <label data-error="wrong" data-success="right" for="status">Status</label>
+                        <input th:field="*{status}" type="text" id="status" class="form-control validate">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label data-error="wrong" data-success="right" for="price">Price</label>
+                        <input th:field="*{price}" type="text" id="price" class="form-control validate">
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Image</label>
+                            <input type="file" name="img"
+                                   class="form-control-file"
+                                   id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <input type="submit" value="Submit" class="btn btn-dark">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head">
+</head>
+<body>
+
+<!--    Section-->
+<div th:replace="layout/frag :: top-bar"></div>
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{home}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active"><a class="nav-link" th:href="@{cars-admin}">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+
+                    <li class="nav-item"><a class="nav-link" th:href="@{cars-management}">Vehicle Mangement</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div class="page-heading about-heading header-text" style="background-image: url(/images/heading-6-1920x500.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h4>Welcome to amazing world</h4>
+                    <h2>Cars</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-form">
+                    <form action="#">
+                        <label>Used/New:</label>
+
+                        <label>Vehicle Type:</label>
+
+                        <select class="form-control">
+                            <option value="all">--All --</option>
+                            <option value="suv">--SUV --</option>
+                            <option value="sport">--Sport --</option>
+                            <option value="sedan">--Sedan --</option>
+                            <option value="coupe">--Coupe --</option>
+                        </select>
+
+                        <label>Make:</label>
+
+                        <select class="form-control">
+                            <option value="all">-- All --</option>
+                            <option value="telsa">-- Telsa --</option>
+                            <option value="bmw">-- BMW --</option>
+                            <option value="volvo">-- Volvo --</option>
+                            <option value="audi">-- Audi --</option>
+                            <option value="mazda">-- Mazda --</option>
+                            <option value="honda">-- Honda --</option>
+                        </select>
+
+                        <label>Number of seats:</label>
+
+                        <select class="form-control">
+                            <option value="">-- All --</option>
+                            <option value="">-- All --</option>
+                            <option value="">-- All --</option>
+                            <option value="">-- All --</option>
+                        </select>
+
+                        <button type="submit" class="filled-button btn-block">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="row">
+
+                    <div th:each="vehicle: ${listVehicle}">
+                        <div class="col-lg-4 col-md-6" >
+                            <div class="product-item" style="width: 350px; height: 460px";>
+                                <a th:href="@{car/{id}(id = ${vehicle.vehicleId})}"><img style="width: 348px; height: 253.94px;" th:src="@{${vehicle.getImg()}}" alt=""></a>
+                                <div class="down-content container" style="">
+                                    <a href="car-details/">
+                                        <div>
+                                            <h4 style="display: inline-block " th:text="${vehicle.getVehicleMake()}"></h4>
+                                            <h4 style="display: inline-block " th:text="${vehicle.getVehicleModel()}"></h4>
+                                        </div>
+                                    </a>
+
+                                    <div>
+                                        <h6 style="display: inline-block">$</h6>
+                                        <h6 style="display: inline-block" th:text="${vehicle.getPrice()}"></h6>
+                                    </div>
+
+                                    <div>
+                                        <p style="display: inline-block" th:text="${vehicle.getVehicleHorsepower()}"></p>
+                                        <p style="display: inline-block" >/</p>
+                                        <p style="display: inline-block" th:text="${vehicle.getVehicleType()}"></p>
+                                        <p style="display: inline-block" >/</p>
+                                        <p style="display: inline-block" th:text="${vehicle.getVehicleYear()}"></p>
+                                    </div>
+
+                                    <small>
+                                        <strong><i class="fa fa-dashboard"></i></strong>
+                                        <strong th:text="${vehicle.getVehicleEngine()}"></strong>&nbsp;&nbsp;&nbsp;
+                                        <strong title="Views"><i class="fa fa-cog"></i> Manual</strong>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <ul class="pages">
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="layout/frag :: footer"></div>
+</body>
+</html>

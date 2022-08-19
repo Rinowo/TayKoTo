@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link th:rel="icon" th:href="@{images/favicon.ico}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Car Dealer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/vendor/bootstrap/css/bootstrap.min.css}">
+    <script src="https://kit.fontawesome.com/3253e5e765.js" crossorigin="anonymous"></script>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/owl.css}">
+    <link rel="stylesheet" th:href="@{/css/fontawesome.css}">
+
+</head>
+    <div th:fragment="preloader">
+        <div id="preloader">
+            <div class="jumper">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="top-bar">
+        <div id="topbar" class="d-flex align-items-center">
+            <div class="container d-flex justify-content-center justify-content-md-between">
+                <div class="contact-info d-flex align-items-center">
+                    <i style="font-weight: 700;" class="far fa-envelope"><a style="font-family: 'Poppins', sans-serif;" href="mailto:CarDealer@gmail.com"> CarDealer@gmail.com</a></i>
+                    <i style="font-weight: 700;" class="fas fa-mobile-alt"></i><i style="font-family: 'Poppins', sans-serif;">+84 369 12828</i>
+                </div>
+                <div class="social-links d-md-flex align-items-center">
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                        <form action="http://google.com/search" target="_blank">
+                            <input name="q">
+                        </form>
+                    </div>
+                    <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="tiktok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="banner">
+        <div class="banner header-text">
+            <div class="owl-banner owl-carousel">
+                <div class="banner-item-01">
+                    <div class="text-content">
+                        <h4 style="font-size: 30px;">Find your car today!</h4>
+                        <h2 style="font-size: 38px">Welcome to the world of sports car fascination</h2>
+                    </div>
+                </div>
+                <div class="banner-item-02">
+                    <div class="text-content">
+                        <h4 style="font-size: 30px">You are the one that make all of your success</h4>
+                        <h2 style="font-size: 35px;">Don’t tell people what you want. Just get it done</h2>
+                    </div>
+                </div>
+                <div class="banner-item-03">
+                    <div class="text-content">
+                        <h4 style="font-size: 30px;">A key to your dream car</h4>
+                        <h2 style="font-size: 40px;">The key that open the door to happiness</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="product">
+        <div class="latest-products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Featured Cars</h2>
+                            <a th:href="@{/cars}">view more <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                    <div th:each="vehicle: ${listVehicle}">
+                        <div class="col-lg-4 col-md-6" >
+                            <div class="product-item card" style="width: 350px; height: 460px">
+                                <a th:href="@{car/{id}(id = ${vehicle.vehicleId})}">
+                                    <img style="width: 348px; height: 253.94px;" class="card-img-top" th:src="@{${vehicle.getImg()}}" alt=""></a>
+                                <div class="down-content container" style="">
+                                    <a href="car-details/">
+                                        <div>
+                                            <h4 class="card-title" style="display: inline-block " th:text="${vehicle.getVehicleMake()}"></h4>
+                                            <h4 class="card-title" style="display: inline-block " th:text="${vehicle.getVehicleModel()}"></h4>
+                                        </div>
+                                    </a>
+
+                                    <div>
+                                        <h6 style="display: inline-block">$</h6>
+                                        <h6 style="display: inline-block" th:text="${vehicle.getPrice()}"></h6>
+                                    </div>
+
+                                    <div>
+                                        <p class="card-text" style="display: inline-block" th:text="${vehicle.getVehicleHorsepower()}"></p>
+                                        <p class="card-text" style="display: inline-block" >/</p>
+                                        <p class="card-text" style="display: inline-block" th:text="${vehicle.getVehicleType()}"></p>
+                                        <p class="card-text" style="display: inline-block" >/</p>
+                                        <p class="card-text" style="display: inline-block" th:text="${vehicle.getVehicleYear()}"></p>
+                                    </div>
+
+                                    <small>
+                                        <strong class="card-text"><i class="fa fa-dashboard"></i></strong>
+                                        <strong class="card-text" th:text="${vehicle.getVehicleEngine()}"></strong>&nbsp;&nbsp;&nbsp;
+                                        <strong class="card-text" title="Views"><i class="fa fa-cog"></i> Manual</strong>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="team">
+        <div class="happy-clients" id="team">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Team</h2>
+
+                            <a href="testimonials.html">read more <i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="owl-clients owl-carousel text-center">
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="down-content">
+                                    <h4>Ng Tung Anh</h4>
+                                    <p class="n-m"><em>"Con nhà lính, tính nhà thơ"</em></p>
+                                </div>
+                            </div>
+
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="down-content">
+                                    <h4>Ng Hong Nhung</h4>
+                                    <p class="n-m"><em>"Con rồng cháu baron"</em></p>
+                                </div>
+                            </div>
+
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="down-content">
+                                    <h4>Cua kì cục</h4>
+                                    <p class="n-m"><em>"br...."</em></p>
+                                </div>
+                            </div>
+
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="down-content">
+                                    <h4>Red</h4>
+                                    <p class="n-m"><em>"Red flag em cứ đâm đầu, đấy gọi là dumb mê"</em></p>
+                                </div>
+                            </div>
+
+                            <div class="service-item">
+                                <div class="icon">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="down-content">
+                                    <h4>Blue</h4>
+                                    <p class="n-m"><em>"Bầu trời năm ấy không xanh mãi. Anh của em giờ phải lòng ai?"</em></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="inner-content">
+                            <p>Cardealer.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+    </div>
+
+    <div th:fragment="script">
+        <script type="text/javascript" th:src="@{vendor/jquery/jquery.min.js}"></script>
+        <script type="text/javascript" th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+        <script type="text/javascript" th:src="@{/js/custom.js}"></script>
+        <script type="text/javascript" th:src="@{/js/owl.js}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    </div>
+</html>

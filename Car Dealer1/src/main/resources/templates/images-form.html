@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head"></head>
+<body>
+
+<div>
+    <form th:action="@{/add/images}"
+          th:object="${gallery}"
+          enctype="multipart/form-data"
+          method="POST">
+
+        <div class="row container">
+            <div class="row">
+                <div class="col">
+                    <label data-error="wrong" data-success="right" for="price">Vehicle Id</label>
+                    <input th:field="${gallery.vehicleId}" type="text" id="price" class="form-control validate">
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Image</label>
+                        <input type="file" name="img"
+                               class="form-control-file"
+                               id="exampleFormControlFile1">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <input type="submit" value="Submit" class="btn btn-dark">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

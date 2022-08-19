@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/frag :: head">
+    <title></title>
+</head>
+<body>
+<header class=""    >
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/home}">Home</a>
+                    </li>
+
+                    <li class="nav-item active"><a class="nav-link" href="cars">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+
+                    <li class="nav-item"><a class="nav-link" th:href="@{/order-list/{id}(id = ${user.customerId})}">Order</a></li>
+
+                    <li class="nav-item"><a th:href="@{/logout}" class="nav-link">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div class="page-heading about-heading header-text" style="background-image: url(/images/heading-6-1920x500.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-content">
+                    <h2 th:text="${customer.customerName}"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+<!--            <th scope="col">Brand</th>-->
+<!--            <th scope="col">Model</th>-->
+            <th scope="col">Price</th>
+            <th scope="col">Deposit</th>
+            <th scope="col">Order day</th>
+            <th scope="col">Arrive day</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="deal : ${deal}">
+<!--            <td th:text="${vehicle.vehicleMake}"></td>-->
+<!--            <td th:text="${vehicle.vehicleModel}"></td>-->
+            <td th:text="${deal.}"></td>
+            <td th:text="${deal.deposit}"></td>
+            <td th:text="${deal.orderDate}"></td>
+            <td th:text="${deal.arriveDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div th:replace="layout/frag :: footer"></div>
+<div th:replace="layout/frag :: script"></div>
+</body>
+</html>

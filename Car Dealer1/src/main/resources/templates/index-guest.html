@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="layout/frag :: head">
+</head>
+<body>
+
+<div th:replace="layout/frag :: preloader"></div>
+
+<!--    Section-->
+<div th:replace="layout/frag :: top-bar"></div>
+<!-- Header -->
+<header class="">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href=""><h2>Car Dealer <em>Website</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul th:switch="${user}" class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/home}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" th:href="@{/cars}">Cars</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+
+                    <div th:case="null">
+                        <li class="nav-item"><a data-target="#loginModal" data-toggle="modal" class="nav-link" href="#">Login</a></li>
+                            <div class="modal fade" id="loginModal" tabindex="-1" roles="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" roles="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header border-bottom-0">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-title text-center" style="padding-bottom: 30px;">
+                                                <h4>Login</h4>
+                                            </div>
+                                            <div class="d-flex flex-column text-center">
+                                                <form th:action="@{j_spring_security_check}" method="POST">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="username" name="username" placeholder="Your username...">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Your password...">
+                                                    </div>
+                                                    <button style="background-color: #f33f3f" type="submit" class="btn btn-info btn-block btn-round">Login</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            <div  class="signup-section">Not a member yet? <a th:href="@{/register}" class="text-info" style="color: #f33f3f"> Sign Up</a>.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div th:case="*">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" th:href="@{/order-list/{id}(id = ${user.customerId})}">Order</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+
+
+<!--                            Oanh-->
+
+<!--                            Logged user: <span sec:authentication="name">Bob</span>-->
+<!--                            Roles: <span sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>-->
+<!--                            <li sec:authorize="hasRole('ROLE_ADMIN')"-->
+<!--                                class="nav-item"><a-->
+<!--                                    class="nav-link"-->
+<!--                                    th:href="@{/cars-management}">Management</a></li>-->
+                        </ul>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!--    Banner-->
+<div th:replace="layout/frag :: banner"></div>
+
+<!--    Product-->
+<!--<div th:replace="layout/frag :: product"></div>-->
+<div th:replace="layout/frag :: product"></div>
+
+<!--    Team-->
+<div th:replace="layout/frag :: team"></div>
+
+
+<div class="call-to-action" id="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inner-content">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4>Have a question? Let's connect.</h4>
+                            <p>Contact our team.</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 text-right">
+                            <a href="contact.html" class="filled-button">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    Footer-->
+<div th:replace="layout/frag :: footer"></div>
+
+<!-- Script-->
+
+<div th:replace="layout/frag :: script"></div>
+
+</body>
+</html>
